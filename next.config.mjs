@@ -8,6 +8,18 @@ const nextConfig = {
         port: "",
         // pathname: "/account123/**",
       },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+        port: "",
+        // pathname: "/account123/**",
+      },
+      {
+        protocol: "https",
+        hostname: "openweathermap.org",
+        port: "",
+        // pathname: "/account123/**",
+      },
     ],
   },
 };

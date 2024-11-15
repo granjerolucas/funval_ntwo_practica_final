@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
-
+import "./css/weather/css/weather-icons.min.css";
+import "./css/weather/css/weather-icons-wind.min.css";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
