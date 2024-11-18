@@ -32,7 +32,7 @@ const LastNews = ({ sources }) => {
     };
   }, []);
   return (
-    <div className="columns-4 gap-4">
+    <div className="grid grid-cols-4 gap-4">
       {listNews.map((item, index) => {
         return <CardNewsSeparate key={index} item={item} limitTitle={60} />;
       })}

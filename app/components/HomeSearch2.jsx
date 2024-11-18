@@ -10,7 +10,7 @@ const HomeSearch2 = ({ sources }) => {
     const req = NewsApi.getCurrentNews(sources.map((item) => item.id));
     req.action.then((res) => {
       setListNews(
-        res.articles.map((item) => {
+        res.articles.filter((item) => item.title !== "[Removed]").slice(0, 5).map((item) => {
           item.source_detail = sources.find(
             (source) => source.id == item.source.id
           );

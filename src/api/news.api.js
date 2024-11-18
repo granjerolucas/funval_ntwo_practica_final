@@ -35,8 +35,8 @@ axiosClient.interceptors.request.use(
 export const getCurrentNews = (sources = ["abc-news"]) => {
   const current = dayjs();
   return addRequest(
-    // `${URL}/everything`,
-    baseUrl("api/test"),
+    `${URL}/everything`,
+    // baseUrl("api/test"),
     "GET",
     (res) => res.data,
     {
@@ -45,7 +45,7 @@ export const getCurrentNews = (sources = ["abc-news"]) => {
         from: current.subtract(1, "day").format("YYYY-MM-DD"),
         sortBy: "popularity",
         sources: sources.join(","),
-        pageSize: 5,
+        pageSize: 10,
       },
     },
     axiosClient
