@@ -3,7 +3,9 @@ import Link from "next/link";
 import React from "react";
 
 const Navbar = async () => {
-  const res = await fetch(baseUrl(`api/sources/categories`));
+  const res = await fetch(baseUrl(`api/sources/categories`),{
+    cache: "no-store",
+  });
   const data = await res.json();
   return (
     <div>

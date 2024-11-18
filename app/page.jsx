@@ -9,7 +9,9 @@ import { baseUrl } from "@/src/utils/url.utils";
 import LastNews from "./components/LastNews";
 
 async function Home() {
-  const res = await fetch(baseUrl(`api/sources`));
+  const res = await fetch(baseUrl(`api/sources`), {
+    cache: "no-store",
+  });
   const sources = await res.json();
 
   return (

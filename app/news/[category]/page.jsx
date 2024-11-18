@@ -4,7 +4,9 @@ import React from "react";
 import NewsCategory from "./components/NewsCategory";
 
 const NewsCategoryPage = async (props) => {
-  const res = await fetch(baseUrl(`api/sources`));
+  const res = await fetch(baseUrl(`api/sources`), {
+    cache: "no-store",
+  });
   const sources = await res.json();
   console.log(sources[0]);
   const params = await props.params;
