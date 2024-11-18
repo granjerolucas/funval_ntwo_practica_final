@@ -24,7 +24,7 @@ const Footer = async () => {
           <ul className="space-y-3 text-sm mt-4">
             {categories.map((item, index) => {
               return (
-                <li className="flex gap-x-3">
+                <li className="flex gap-x-3" key={index}>
                   <svg
                     className="shrink-0 size-4 mt-0.5 text-blue-600 dark:text-blue-500"
                     xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ const Footer = async () => {
           <ul className="space-y-3 text-sm mt-4">
             {sources.slice(0, 10).map((item, index) => {
               return (
-                <li className="flex gap-x-3">
+                <li className="flex gap-x-3" key={index}>
                   <svg
                     className="shrink-0 size-4 mt-0.5 text-blue-600 dark:text-blue-500"
                     xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ const Footer = async () => {
           <ul className="space-y-3 text-sm mt-4">
             {languages.map((item, index) => {
               return (
-                <li className="flex gap-x-3">
+                <li className="flex gap-x-3" key={index}>
                   <svg
                     className="shrink-0 size-4 mt-0.5 text-blue-600 dark:text-blue-500"
                     xmlns="http://www.w3.org/2000/svg"
