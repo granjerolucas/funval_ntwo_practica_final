@@ -5,16 +5,23 @@ import React, { useEffect, useState } from "react";
 
 const LastNews = ({ sources }) => {
   const [listNews, setListNews] = useState([]);
-  console.log("luca", sources);
   useEffect(() => {
-    const req = NewsApi.getLastNews(sources.map((item) => item.id));
-    console.log("aaaaaaaaaaa", req);
+    const req = NewsApi.getLastNews(sources.map((item) => item.id), 25);
     req.action.then((res) => {
       setListNews(
-        res.articles.map((item) => {
-          item.source_detail = sources.find(
+        res.articles.filter((item) => item.title !== "[Removed]").slice(0, 20).map((item) => {
+          const f = sources.find(
             (source) => source.id == item.source.id
           );
+          if (f) {
+
+            item.source_detail = f
+          } else {
+            item.source_detail = {
+              name: 'None',
+            }
+          }
+
           return item;
         })
       );

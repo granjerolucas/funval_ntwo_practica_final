@@ -6,10 +6,8 @@ import { NewsApi } from "@/src/api";
 
 const HomeSearch2 = ({ sources }) => {
   const [listNews, setListNews] = useState([]);
-  console.log("luca", sources);
   useEffect(() => {
     const req = NewsApi.getCurrentNews(sources.map((item) => item.id));
-    console.log("aaaaaaaaaaa", req);
     req.action.then((res) => {
       setListNews(
         res.articles.map((item) => {

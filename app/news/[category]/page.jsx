@@ -8,7 +8,6 @@ const NewsCategoryPage = async (props) => {
     cache: "no-store",
   });
   const sources = await res.json();
-  console.log(sources[0]);
   const params = await props.params;
   const finalSources = sources.filter(
     (item) => item.category.toLowerCase() === params.category.toLowerCase()
@@ -19,7 +18,8 @@ const NewsCategoryPage = async (props) => {
         {params.category}
       </h1>
       <SearchNews />
-      <NewsCategory sources={finalSources} />
+      <NewsCategory sources={finalSources} category={params.category} />
+     
     </div>
   );
 };

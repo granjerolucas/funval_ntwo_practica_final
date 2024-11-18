@@ -28,6 +28,7 @@ const CardNews = ({ item, limitTitle = -1, category }) => {
             {item.source_detail.category}
           </p>
           <a
+            target="_blank"
             href={item.url}
             title={item.title}
             className={`${
@@ -39,7 +40,7 @@ const CardNews = ({ item, limitTitle = -1, category }) => {
               : item.title}
           </a>
           <p className=" text-xs text-white ">
-          Last updated {dayjs(item.publishedAt).fromNow()}
+            Last updated {dayjs(item.publishedAt).fromNow()}
           </p>
         </div>
       </div>

@@ -3,11 +3,11 @@ import Image from "next/image";
 import React from "react";
 import realtiveTime from "dayjs/plugin/relativeTime";
 dayjs.extend(realtiveTime);
-const CardNewsSeparate = ({ item, limitTitle = -1, category }) => {
+const CardNewsSeparateLateral = ({ item, limitTitle = -1, category }) => {
   if (item == undefined) return null;
 
   return (
-    <div className="relative bg-white hover:borderx hover:shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70 hydrated bg-cover  mb-4">
+    <div className="relative grid grid-cols-[1fr_2fr] gap-4 bg-white hover:borderx hover:shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70 hydrated bg-cover  mb-4 items-center">
       <div
         className="w-full h-[14rem] rounded-xl  object-coverx"
         style={{
@@ -18,7 +18,7 @@ const CardNewsSeparate = ({ item, limitTitle = -1, category }) => {
         // src="https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=560&q=80"
         alt="Card Image"
       ></div>
-      <div className="bottom-0 left-0 w-full h-[7rem] flex flex-col rounded-xl justify-end">
+      <div className="bottom-0 left-0 w-full  flex flex-col rounded-xl justify-end">
         <div className="p-2">
           <p className="text-gray-400 capitalize">
             {item.source_detail.category}
@@ -33,6 +33,7 @@ const CardNewsSeparate = ({ item, limitTitle = -1, category }) => {
               ? `${item.title.substring(0, limitTitle)}...`
               : item.title}
           </a>
+          <p>{item.description}</p>
           <p className=" text-xs text-gray-500 ">
             Last updated {dayjs(item.publishedAt).fromNow()}
           </p>
@@ -42,4 +43,4 @@ const CardNewsSeparate = ({ item, limitTitle = -1, category }) => {
   );
 };
 
-export default CardNewsSeparate;
+export default CardNewsSeparateLateral;

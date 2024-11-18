@@ -52,8 +52,17 @@ export const getCurrentNews = (sources = ["abc-news"]) => {
   );
 };
 
-export const getLastNews = (sources = ["abc-news"]) => {
-  const current = dayjs();
+export const getLastNews = (
+  sources = ["abc-news"],
+  pageSize = 12,
+  sortBy = "publishedAt",
+  q="",
+  from=""
+) => {
+  if (from == '') {
+    from = dayjs();
+    from = from.subtract(1, "day").format("YYYY-MM-DD");
+  }
   return addRequest(
     `${URL}/everything`,
     // baseUrl("api/test"),
@@ -61,11 +70,11 @@ export const getLastNews = (sources = ["abc-news"]) => {
     (res) => res.data,
     {
       params: {
-        // q: "",
-        // from: current.subtract(1, "day").format("YYYY-MM-DD"),
-        // sortBy: "popularity",
+        q,
+        from,
+        sortBy,
         sources: sources.join(","),
-        pageSize: 12,
+        pageSize,
       },
     },
     axiosClient

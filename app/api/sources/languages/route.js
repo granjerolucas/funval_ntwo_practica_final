@@ -8,7 +8,6 @@ export async function GET(request) {
     "languages.json"
   );
   const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-  console.log(jsonData[0]);
   const resData = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/sources`
   ).then((res) => res.json());

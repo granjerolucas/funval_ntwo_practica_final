@@ -70,7 +70,6 @@ export const addRequest = (
   options = {},
   axiosHandler = null
 ) => {
-  console.log("log url", url, axiosHandler);
   if (preData === null) {
     preData = (res) => res.data;
   }

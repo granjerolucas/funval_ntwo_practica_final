@@ -3,6 +3,7 @@ import "./globals.css";
 import "./css/weather/css/weather-icons.min.css";
 import "./css/weather/css/weather-icons-wind.min.css";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ function RootLayout({ children }) {
         <main className="max-w-[85rem] w-full mx-auto px-4 my-10">
           {children}
         </main>
+        <Footer/>
       </body>
     </html>
   );

@@ -13,7 +13,7 @@ const Navbar = async () => {
         <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-betweenx">
           <a
             className="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80 dark:text-white"
-            href="#"
+            href="/"
             aria-label="Brand"
           >
             News App
