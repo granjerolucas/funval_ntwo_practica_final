@@ -4,18 +4,18 @@ import path from "path";
 export async function GET(request) {
   const filePath = path.join(
     process.cwd(),
-    "app/api/sources/languages",
-    "languages.json"
+    "app/api/sources/countries",
+    "data.json"
   );
   const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-  console.log(jsonData[0]);
+  console.log(jsonData)
   const resData = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/sources`
   ).then((res) => res.json());
 
   let filteredData = [];
   if (resData.length > 0) {
-    filteredData = [...new Set(resData.map((item) => item.language))];
+    filteredData = [...new Set(resData.map((item) => item.country))];
   }
   // {
   //   id: 'rbc',
@@ -30,12 +30,12 @@ export async function GET(request) {
   const time = 60 * 60 * 24;
   return NextResponse.json(
     filteredData
-      .map((item) => jsonData.find((i) => i.alpha2 === item))
+      .map((item) => jsonData.find((i) => i.Code.toLowerCase() === item.toLowerCase()))
       .filter((item) => item)
       .map((item) => {
         return {
-          id: item.alpha2,
-          name: item.English,
+          id: item.Code.toLowerCase(),
+          name: item.Name,
         };
       }),
     {

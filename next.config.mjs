@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
+import i18Config from "./next-i18next.config.mjs" 
 const nextConfig = {
+  // i18n: i18Config.i18n,
   images: {
     remotePatterns: [
       {

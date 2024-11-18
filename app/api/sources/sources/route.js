@@ -15,7 +15,7 @@ export async function GET(request) {
 
   let filteredData = [];
   if (resData.length > 0) {
-    filteredData = [...new Set(resData.map((item) => item.language))];
+    filteredData = [...new Set(resData.map((item) => item.id))];
   }
   // {
   //   id: 'rbc',
@@ -26,22 +26,15 @@ export async function GET(request) {
   //   language: 'ru',
   //   country: 'ru'
   // },
-
   const time = 60 * 60 * 24;
-  return NextResponse.json(
-    filteredData
-      .map((item) => jsonData.find((i) => i.alpha2 === item))
-      .filter((item) => item)
-      .map((item) => {
-        return {
-          id: item.alpha2,
-          name: item.English,
-        };
-      }),
-    {
-      headers: {
-        "Cache-Control": `s-maxage=${time}, stale-while-revalidate=${time - 1}`,
-      },
+  return NextResponse.json(filteredData.map(item => {
+    return {
+      id: item,
+      name: item,
     }
-  );
+  }), {
+    headers: {
+      "Cache-Control": `s-maxage=${time}, stale-while-revalidate=${time - 1}`,
+    },
+  });
 }
