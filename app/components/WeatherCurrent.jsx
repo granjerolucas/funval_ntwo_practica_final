@@ -126,10 +126,9 @@ const WeatherCurrent = () => {
             </div>
             <div className="flex justify-between gap-x-2 items-center">
               <Image
-              className="self-center"
+                className="self-center"
                 src={`https://openweathermap.org/img/wn/${weatherFilter.current.weather[0].icon}@4x.png`}
                 alt="icon"
-                className="self-center"
                 width={100}
                 height={100}
               />

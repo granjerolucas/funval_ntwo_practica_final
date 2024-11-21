@@ -15,7 +15,7 @@ const SearchNews = async () => {
   const dataC = await resC.json();
   return (
     <BaseSearchNews
-      show={true}
+      show={false}
       data={{
         categories: data,
         languages: dataC,

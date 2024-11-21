@@ -17,7 +17,7 @@ const BaseSearchNews = ({ data, show = false }) => {
     };
   }, []);
   return isOpen ? (
-    <div className="flex flex-col md:flex-row  content-center items-center gap-4 mb-8 ">
+    <div className="flex flex-col md:flex-row  content-center items-center gap-4 mb-8 hydrated">
       <div className="md:w-[24rem] w-full">
         <form className="w-full">
           <div className="flex gap-2">
