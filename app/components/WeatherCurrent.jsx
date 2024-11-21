@@ -79,7 +79,7 @@ const WeatherCurrent = () => {
           obtenerUbicacion();
         } else {
           // requestPosition = true;
-          console.error("Permiso de geolocalización denegado.");
+          console.log("Permiso de geolocalización denegado.");
           getSimplePosition();
         }
 
@@ -90,7 +90,7 @@ const WeatherCurrent = () => {
           } else {
             requestPosition = true;
             getSimplePosition();
-            console.error("Permiso de geolocalización denegado.");
+            console.log("Permiso de geolocalización denegado.");
           }
         };
       });
@@ -112,39 +112,40 @@ const WeatherCurrent = () => {
   return (
     <div className="hydrated">
       <div
-        className={`blockx w-full h-[16rem]  p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-slate-700 dark:border-gray-700   flex flex-col gap-4 justify-center relative ${"bg"}`}
+        className={`hidden w-full md:h-[16rem] p-6  md:p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-slate-700 dark:border-gray-700   md:flex md:flex-col gap-4 justify-center relative ${"bg"}`}
         style={{
           backgroundBlendMode: "overlay",
           backgroundImage: "bimage",
         }}
       >
         {loaded && weatherFilter !== undefined ? (
-          <div className="flex flex-col gap-y-2 text-center">
-            <div className="flex justify-between gap-x-2 items-center text-2xl font-semibold">
+          <div className="flex flex-col md:gap-y-2 text-center">
+            <div className="flex justify-between gap-x-2 items-center md:text-2xl font-semibold">
               <span className="w-[70%] text-left">{search.city}</span>
               <CurrentTime />
             </div>
             <div className="flex justify-between gap-x-2 items-center">
               <Image
+              className="self-center"
                 src={`https://openweathermap.org/img/wn/${weatherFilter.current.weather[0].icon}@4x.png`}
                 alt="icon"
                 className="self-center"
                 width={100}
                 height={100}
               />
-              <h5 className=" text-[4rem] font-bold tracking-tight text-gray-900 dark:text-white text-center">
+              <h5 className="text-[2rem] md:text-[4rem] font-bold tracking-tight text-gray-900 dark:text-white text-center">
                 {Math.round(weatherFilter.current.temp)}°C
               </h5>
               <div className="flex flex-col gap-y-2 text-center">
-                <p className="text-2xl font-semibold text-gray-700 dark:text-gray-400 capitalize">
+                <p className="md:text-2xl font-semibold text-gray-700 dark:text-gray-400 capitalize">
                   {weatherFilter.current.weather[0].description}
                 </p>
-                <p className="font-normal text-gray-700 dark:text-gray-200">
+                <p className="text-sm font-normal text-gray-700 dark:text-gray-200">
                   {dayjs().format("ddd DD MMM")}
                 </p>
               </div>
             </div>
-            <div className="grid grid-cols-4 gap-4 ">
+            <div className="hidden md:grid md:grid-cols-4 gap-4 ">
               <div className="  bg-white  dark:bg-slate-700 dark:border-gray-700 mb-4   gap-4 justify-center relative">
                 <h5 className="text-base font-semibold tracking-tight text-gray-900 dark:text-white text-center">
                   Wind status

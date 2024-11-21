@@ -27,10 +27,10 @@ function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased hydrated`}
       >
         <Navbar />
-        <main className="max-w-[85rem] w-full mx-auto px-4 my-10">
+        <main className="max-w-[85rem] w-full mx-auto px-4 my-24">
           {children}
         </main>
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

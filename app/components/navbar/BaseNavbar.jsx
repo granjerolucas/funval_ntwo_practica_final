@@ -19,10 +19,10 @@ const BaseNavbar = ({ data }) => {
         >
           News App
         </Link>
-        <div className="md:hidden flex gap-2">
+        <div className=" flex gap-2">
           <button
             type="button"
-            className="hs-collapse-toggle relative size-9 flex justify-center items-center text-sm font-semibold rounded-lg border  text-black hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none"
+            className="md:w-[9rem]  hs-collapse-toggle relative  flex justify-center items-center text-sm font-semibold rounded-lg border px-4 py-2 text-black hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none gap-2"
             id="hs-base-header-collapse"
             aria-expanded="false"
             aria-controls="hs-base-header"
@@ -30,6 +30,7 @@ const BaseNavbar = ({ data }) => {
             data-hs-collapse="#hs-base-header"
             onClick={onOpenSearch}
           >
+            <span>Search news</span>
             <svg
               className="w-4 h-4 text-gray-500 dark:text-gray-400"
               aria-hidden="true"
@@ -50,7 +51,7 @@ const BaseNavbar = ({ data }) => {
           </button>
           <button
             type="button"
-            className="hs-collapse-toggle relative size-9 flex justify-center items-center text-sm font-semibold rounded-lg border  text-black hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none"
+            className="md:hidden hs-collapse-toggle relative size-9 flex justify-center items-center text-sm font-semibold rounded-lg border  text-black hover:bg-white/10 focus:outline-none focus:bg-white/10 disabled:opacity-50 disabled:pointer-events-none"
             id="hs-base-header-collapse"
             aria-expanded="false"
             aria-controls="hs-base-header"

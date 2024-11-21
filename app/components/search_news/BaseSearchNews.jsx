@@ -4,8 +4,8 @@ import SelectLanguage from "./SelectLanguage";
 import SelectCategory from "./SelectCategory";
 import BusEvents from "@/src/utils/busevent";
 
-const BaseSearchNews = ({ data }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const BaseSearchNews = ({ data, show = false }) => {
+  const [isOpen, setIsOpen] = useState(show);
 
   useEffect(() => {
     const fnOpen = () => {
@@ -63,7 +63,7 @@ const BaseSearchNews = ({ data }) => {
             </div>
             <button
               type="button"
-              class="md:hidden  py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-400 dark:hover:bg-blue-900 dark:focus:bg-blue-900"
+              className="md:hidden  py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-400 dark:hover:bg-blue-900 dark:focus:bg-blue-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

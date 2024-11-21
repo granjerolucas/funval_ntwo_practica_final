@@ -10,22 +10,25 @@ const HomeSearch2 = ({ sources }) => {
     const req = NewsApi.getCurrentNews(sources.map((item) => item.id));
     req.action.then((res) => {
       setListNews(
-        res.articles.filter((item) => item.title !== "[Removed]").slice(0, 5).map((item) => {
-          item.source_detail = sources.find(
-            (source) => source.id == item.source.id
-          );
-          return item;
-        })
+        res.articles
+          .filter((item) => item.title !== "[Removed]")
+          .slice(0, 5)
+          .map((item) => {
+            item.source_detail = sources.find(
+              (source) => source.id == item.source.id
+            );
+            return item;
+          })
       );
     });
 
     return () => {
       req.cancel();
     };
-  }, []);
+  }, [sources]);
   return (
-    <div className="grid grid-cols-[8fr_6fr] gap-4 ">
-      <div>
+    <div className="block md:grid md:grid-cols-[8fr_6fr] gap-4 ">
+      <div className="md:h-auto h-[20rem]">
         <CardNews item={listNews[0]} />
       </div>
       <div className="flex flex-col gap-4">

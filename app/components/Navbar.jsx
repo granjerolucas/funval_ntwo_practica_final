@@ -9,7 +9,7 @@ const Navbar = async () => {
   });
   const data = await res.json();
   return (
-    <div>
+    <div className="block fixed z-50 w-full top-0"> 
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-3 dark:bg-neutral-800 shadow-lg">
         <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between">
          <BaseNavbar data={data}/>

@@ -16,9 +16,9 @@ const Footer = async () => {
   const languages = await resL.json();
   // console.log(languages)
   return (
-    <div className="max-w-[85rem] w-full mx-auto mb-20">
+    <div className="max-w-[85rem] w-full mx-auto mb-20 ">
       <hr />
-      <div className="grid grid-cols-3 gap-4 mt-4 justify-center ">
+      <div className="grid grid-cols-3 gap-4 mt-4 justify-center md:px-0 px-4">
         <div>
           <h3 className="font-semibold text-lg">Categories</h3>
           <ul className="space-y-3 text-sm mt-4">
