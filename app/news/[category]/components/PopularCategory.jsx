@@ -21,7 +21,7 @@ const PopularCategory = ({ sources }) => {
     return () => {
       req.cancel();
     };
-  }, []);
+  }, [sources]);
   return (
     <div>
       <h3 className="text-2xl font-semibold my-4 capitalize">Popular</h3>
