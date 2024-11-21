@@ -27,13 +27,13 @@ const CardNewsSeparateLateral = ({ item, limitTitle = -1, category }) => {
             target="_blank"
             href={item.url}
             title={item.title}
-            className="text-lg font-bold text-gray-800"
+            className="text-lg font-bold text-gray-800 limit-text-2"
           >
             {limitTitle > 0
               ? `${item.title.substring(0, limitTitle)}...`
               : item.title}
           </a>
-          <p>{item.description}</p>
+          <p className="limit-text-3">{item.description}</p>
           <p className=" text-xs text-gray-500 ">
             Last updated {dayjs(item.publishedAt).fromNow()}
           </p>

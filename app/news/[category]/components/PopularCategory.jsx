@@ -25,7 +25,7 @@ const PopularCategory = ({ sources }) => {
   return (
     <div>
       <h3 className="text-2xl font-semibold my-4 capitalize">Popular</h3>
-      <ol className="list-decimal list-inside text-gray-800 dark:text-white text-2xl">
+      <ol className="list-decimal list-inside text-gray-800 dark:text-white md:text-2xl">
         {listNews.map((item, index) => {
           return (
             <li key={index} className="mb-3">

@@ -17,7 +17,23 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/forms'),
-    require('preline/plugin'),
+    require("@tailwindcss/forms"),
+    require("preline/plugin"),
+    ({ addUtilities }) => {
+      addUtilities({
+        ".limit-text-2": {
+          overflow: "hidden",
+          display: "-webkit-box",
+          "-webkit-line-clamp": "2",
+          "-webkit-box-orient": "vertical",
+        },
+        ".limit-text-3": {
+          overflow: "hidden",
+          display: "-webkit-box",
+          "-webkit-line-clamp": "3",
+          "-webkit-box-orient": "vertical",
+        },
+      });
+    },
   ],
 };
