@@ -9,7 +9,7 @@ const CardNewsSeparateLateral = ({ item, limitTitle = -1, category }) => {
   return (
     <div className="relative grid grid-cols-[1fr_2fr] gap-4 bg-white hover:borderx hover:shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70 hydrated bg-cover  mb-4 items-center">
       <div
-        className="w-full h-[14rem] rounded-xl  object-coverx"
+        className="w-full md:h-[14rem] h-[10rem] rounded-xl  object-coverx"
         style={{
           backgroundImage: `url(${item.urlToImage})`,
           backgroundSize: "cover",

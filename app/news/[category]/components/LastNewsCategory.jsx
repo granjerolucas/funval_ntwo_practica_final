@@ -22,7 +22,7 @@ const LastNewsCategory = ({sources, category}) => {
     return () => {
       req.cancel();
     };
-  }, []);
+  }, [category, sources]);
   return (
     <div>
       {listNews.map((item, index) => {

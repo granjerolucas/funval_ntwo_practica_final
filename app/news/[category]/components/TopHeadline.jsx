@@ -21,9 +21,9 @@ const TopHeadline = ({ category, sources }) => {
     return () => {
       req.cancel();
     };
-  }, []);
+  }, [category]);
   return (
-    <div className="h-[30rem]">
+    <div className="md:h-[30rem] h-[22rem]">
       <CardNews item={listNews[0]} />
     </div>
   );

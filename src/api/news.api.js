@@ -84,8 +84,8 @@ export const getLastNews = (
 export const getTopNews = (category = "general", pageSize = 5) => {
   const current = dayjs();
   return addRequest(
-    `${URL}/top-headlines`,
-    // baseUrl("api/test"),
+    // `${URL}/top-headlines`,
+    baseUrl("api/news/top-headlines"),
     "GET",
     (res) => res.data,
     {
