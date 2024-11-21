@@ -1,5 +1,3 @@
-import CardNews from "@/src/components/CardNews";
-import Image from "next/image";
 import HomeSearch from "./components/HomeSearch";
 import HomeSearch2 from "./components/HomeSearch2";
 import SearchNews from "./components/SearchNews";
