@@ -3,10 +3,26 @@ import React, { useEffect, useState } from "react";
 import SelectLanguage from "./SelectLanguage";
 import SelectCategory from "./SelectCategory";
 import BusEvents from "@/src/utils/busevent";
+import ResultsItems from "./ResultsItems";
 
 const BaseSearchNews = ({ data, show = false }) => {
+  const [locations, setLocations] = useState([]);
+  const [showModal, setShowModal] = useState(true);
   const [isOpen, setIsOpen] = useState(show);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // findLocation(refSearch.current.value).then((res) => {
+    //   setLocations(res);
+    //   setShowModal(true);
+    // });
+  };
+  const handleSelectRsult = (item) => (e) => {
+    e.preventDefault();
+    // onSelected(item);
+    setShowModal(false);
+    // refSearch.current.value = `${item.name}, ${item.state} - ${item.country}`;
+  };
   useEffect(() => {
     const fnOpen = () => {
       setIsOpen((prev) => !prev);
@@ -16,10 +32,17 @@ const BaseSearchNews = ({ data, show = false }) => {
       BusEvents.remove("open-search", fnOpen);
     };
   }, []);
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.id !== "search") {
+        setShowModal(false);
+      }
+    });
+  }, []);
   return isOpen ? (
     <div className="flex flex-col md:flex-row  content-center items-center gap-4 mb-8 hydrated">
-      <div className="md:w-[24rem] w-full">
-        <form className="w-full">
+      <div className="md:w-[24rem] w-full relative">
+        <form className="w-full" onSubmit={handleSubmit}>
           <div className="flex gap-2">
             <div className="w-full">
               <label
@@ -52,6 +75,11 @@ const BaseSearchNews = ({ data, show = false }) => {
                   className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Search News..."
                   required
+                  onFocus={() => {
+                    if (locations.length > 0) {
+                      setShowModal(true);
+                    }
+                  }}
                 />
                 <button
                   type="submit"
@@ -82,6 +110,34 @@ const BaseSearchNews = ({ data, show = false }) => {
             </button>
           </div>
         </form>
+        {showModal && (
+          <div
+            id="dropdown"
+            class="z-10 mt-4 transition-all ease-in-out bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-600 absolute"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdown-button"
+            >
+              {/* {locations.map((item, index) => ( */}
+              {[
+                { name: "Teste 1" },
+                { name: "Teste 2" },
+                { name: "Teste 3" },
+                { name: "Teste 4" },
+                { name: "Teste 4" },
+                { name: "Teste 4" },
+                { name: "Teste 4" },
+              ].map((item, index) => (
+                <ResultsItems
+                  key={index}
+                  data={item}
+                  onClick={handleSelectRsult(item)}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
       <div className="flex flex-row justify-start gap-2">
         {/* <Suspense fallback={<div>Loading...</div>}> */}
