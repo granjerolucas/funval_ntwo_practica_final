@@ -113,10 +113,10 @@ const BaseSearchNews = ({ data, show = false }) => {
         {showModal && (
           <div
             id="dropdown"
-            class="z-10 mt-4 transition-all ease-in-out bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-600 absolute"
+            className="z-10 mt-4 transition-all ease-in-out bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-600 absolute"
           >
             <ul
-              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              className="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdown-button"
             >
               {/* {locations.map((item, index) => ( */}
