@@ -81,18 +81,24 @@ export const getLastNews = (
   );
 };
 
-
 export const getSearch = (
-  sources = ["abc-news"],
+  sources = [],
   pageSize = 12,
   sortBy = "publishedAt",
-  q = "", 
+  q = "",
+  language = "",
   from = ""
 ) => {
   // if (from == "") {
   //   from = dayjs();
   //   from = from.subtract(1, "day").format("YYYY-MM-DD");
   // }
+  let _aditionalParams = {};
+  if (sources.length > 0) {
+    _aditionalParams = {
+      sources: sources.join(","),
+    };
+  }
   return addRequest(
     // `${URL}/everything`,
     baseUrl("api/news/everything"),
@@ -102,9 +108,11 @@ export const getSearch = (
       params: {
         q,
         // from,
+        language,
+
         sortBy,
-        sources: sources.join(","),
         pageSize,
+        ..._aditionalParams,
       },
     },
     axiosClient

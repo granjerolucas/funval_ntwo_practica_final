@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import SelectLanguage from "./SelectLanguage";
 import SelectCategory from "./SelectCategory";
 import BusEvents from "@/src/utils/busevent";
@@ -21,6 +21,16 @@ const BaseSearchNews = ({ data, show = false }) => {
   const [isOpen, setIsOpen] = useState(show);
   const refGotoSearch = useRef(null);
   const refPrevValue = useRef("");
+  const cbSearch = useCallback((q) => {
+    const language = document.getElementById("select-language").value;
+    const category = document.getElementById("select-category").value;
+    const req = getSearch([category], 10, "publishedAt", q, language);
+    req.action.then((res) => {
+      // console.log(res);
+      setResults(res.articles);
+      setShowModal(true);
+    });
+  }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -31,17 +41,8 @@ const BaseSearchNews = ({ data, show = false }) => {
       const fnSearcha = () => {
         console.log("search");
         refPrevValue.current = e.target.value;
-        const language = document.getElementById("select-language").value;
-        const category = document.getElementById("select-category").value;
-        console.log(language, category);
-        const req = getSearch([category], 10, "publishedAt", e.target.value);
-        req.action.then((res) => {
-          // console.log(res);
-          setResults(res.articles);
-          setShowModal(true);
-        });
-        // getSearch(language, category);
-        // getSearch()
+
+        cbSearch(e.target.value);
       };
 
       refGotoSearch.current = setTimeout(fnSearcha, 200);
@@ -63,20 +64,24 @@ const BaseSearchNews = ({ data, show = false }) => {
     const fnOpen = () => {
       setIsOpen((prev) => !prev);
     };
+    const fnGotoSearch = () => {
+      cbSearch(refPrevValue.current);
+    };
     BusEvents.on("open-search", fnOpen);
+    BusEvents.on("reloadSearch", fnGotoSearch);
     return () => {
       BusEvents.remove("open-search", fnOpen);
+      BusEvents.remove("reloadSearch", fnGotoSearch);
     };
-  }, []);
+  }, [cbSearch]);
   useEffect(() => {
     document.addEventListener("click", (e) => {
       if (e.target.id !== "default-search") {
-        console.log("close", e.target.id);
         setShowModal(false);
       }
     });
   }, []);
-  console.log(showModal);
+  
   return isOpen ? (
     <div className="flex flex-col md:flex-row  content-center items-center gap-4 mb-8 hydrated">
       <div className="md:w-[24rem] w-full relative">
@@ -158,13 +163,22 @@ const BaseSearchNews = ({ data, show = false }) => {
               className="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdown-button"
             >
-              {results.map((item, index) => (
-                <ResultsItems
-                  key={index}
-                  data={item}
-                  onClick={handleSelectRsult(item)}
-                />
-              ))}
+              {results.length > 0 ? (
+                results.map((item, index) => (
+                  <ResultsItems
+                    key={index}
+                    data={item}
+                    onClick={handleSelectRsult(item)}
+                  />
+                ))
+              ) : (
+                <div className="flex flex-col gap-2 items-center justify-center">
+                  <p className="text-center text-gray-500 dark:text-neutral-400">
+                    No results found
+                  </p>
+                </div>
+              )}
+              
             </ul>
           </div>
         )}
