@@ -1,17 +1,51 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SelectLanguage from "./SelectLanguage";
 import SelectCategory from "./SelectCategory";
 import BusEvents from "@/src/utils/busevent";
 import ResultsItems from "./ResultsItems";
+import { getSearch } from "@/src/api/news.api";
+
+const isSercheable = (e, prev = "") => {
+  console.log(e.target.value, prev);
+  return (
+    e.keyCode !== 32 &&
+    e.target.value.length >= 3 &&
+    prev.trim().toLowerCase() !== e.target.value.trim().toLowerCase()
+  );
+};
 
 const BaseSearchNews = ({ data, show = false }) => {
-  const [locations, setLocations] = useState([]);
-  const [showModal, setShowModal] = useState(true);
+  const [results, setResults] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const [isOpen, setIsOpen] = useState(show);
-
+  const refGotoSearch = useRef(null);
+  const refPrevValue = useRef("");
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (refGotoSearch.current) {
+      clearTimeout(refGotoSearch.current);
+    }
+    if (isSercheable(e, refPrevValue.current)) {
+      const fnSearcha = () => {
+        console.log("search");
+        refPrevValue.current = e.target.value;
+        const language = document.getElementById("select-language").value;
+        const category = document.getElementById("select-category").value;
+        console.log(language, category);
+        const req = getSearch([category], 10, "publishedAt", e.target.value);
+        req.action.then((res) => {
+          // console.log(res);
+          setResults(res.articles);
+          setShowModal(true);
+        });
+        // getSearch(language, category);
+        // getSearch()
+      };
+
+      refGotoSearch.current = setTimeout(fnSearcha, 200);
+    }
     // findLocation(refSearch.current.value).then((res) => {
     //   setLocations(res);
     //   setShowModal(true);
@@ -21,6 +55,8 @@ const BaseSearchNews = ({ data, show = false }) => {
     e.preventDefault();
     // onSelected(item);
     setShowModal(false);
+    console.log(item);
+    window.open(item.url, "_blank", "noopener,noreferrer");
     // refSearch.current.value = `${item.name}, ${item.state} - ${item.country}`;
   };
   useEffect(() => {
@@ -34,15 +70,17 @@ const BaseSearchNews = ({ data, show = false }) => {
   }, []);
   useEffect(() => {
     document.addEventListener("click", (e) => {
-      if (e.target.id !== "search") {
+      if (e.target.id !== "default-search") {
+        console.log("close", e.target.id);
         setShowModal(false);
       }
     });
   }, []);
+  console.log(showModal);
   return isOpen ? (
     <div className="flex flex-col md:flex-row  content-center items-center gap-4 mb-8 hydrated">
       <div className="md:w-[24rem] w-full relative">
-        <form className="w-full" onSubmit={handleSubmit}>
+        <form className="w-full">
           <div className="flex gap-2">
             <div className="w-full">
               <label
@@ -76,10 +114,11 @@ const BaseSearchNews = ({ data, show = false }) => {
                   placeholder="Search News..."
                   required
                   onFocus={() => {
-                    if (locations.length > 0) {
+                    if (results.length > 0) {
                       setShowModal(true);
                     }
                   }}
+                  onKeyUp={handleSubmit}
                 />
                 <button
                   type="submit"
@@ -113,22 +152,13 @@ const BaseSearchNews = ({ data, show = false }) => {
         {showModal && (
           <div
             id="dropdown"
-            className="z-10 mt-4 transition-all ease-in-out bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-600 absolute"
+            className="bordered z-10 mt-4 transition-all ease-in-out bg-white divide-y divide-gray-100 rounded-lg shadow w-full dark:bg-gray-600 absolute"
           >
             <ul
               className="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdown-button"
             >
-              {/* {locations.map((item, index) => ( */}
-              {[
-                { name: "Teste 1" },
-                { name: "Teste 2" },
-                { name: "Teste 3" },
-                { name: "Teste 4" },
-                { name: "Teste 4" },
-                { name: "Teste 4" },
-                { name: "Teste 4" },
-              ].map((item, index) => (
+              {results.map((item, index) => (
                 <ResultsItems
                   key={index}
                   data={item}
@@ -142,7 +172,7 @@ const BaseSearchNews = ({ data, show = false }) => {
       <div className="flex flex-row justify-start gap-2">
         {/* <Suspense fallback={<div>Loading...</div>}> */}
         <SelectLanguage data={data.languages} />
-        <SelectCategory data={data.categories} />
+        <SelectCategory data={data.sources} />
         {/* </Suspense> */}
       </div>
     </div>

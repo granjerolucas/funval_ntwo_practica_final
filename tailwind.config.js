@@ -21,6 +21,12 @@ module.exports = {
     require("preline/plugin"),
     ({ addUtilities }) => {
       addUtilities({
+        ".limit-text-1": {
+          overflow: "hidden",
+          display: "-webkit-box",
+          "-webkit-line-clamp": "1",
+          "-webkit-box-orient": "vertical",
+        },
         ".limit-text-2": {
           overflow: "hidden",
           display: "-webkit-box",

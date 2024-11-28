@@ -81,6 +81,36 @@ export const getLastNews = (
   );
 };
 
+
+export const getSearch = (
+  sources = ["abc-news"],
+  pageSize = 12,
+  sortBy = "publishedAt",
+  q = "", 
+  from = ""
+) => {
+  // if (from == "") {
+  //   from = dayjs();
+  //   from = from.subtract(1, "day").format("YYYY-MM-DD");
+  // }
+  return addRequest(
+    // `${URL}/everything`,
+    baseUrl("api/news/everything"),
+    "GET",
+    (res) => res.data,
+    {
+      params: {
+        q,
+        // from,
+        sortBy,
+        sources: sources.join(","),
+        pageSize,
+      },
+    },
+    axiosClient
+  );
+};
+
 export const getTopNews = (category = "general", pageSize = 5) => {
   const current = dayjs();
   return addRequest(
